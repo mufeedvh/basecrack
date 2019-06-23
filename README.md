@@ -2,7 +2,7 @@
 	<a href="https://github.com/mufeedvh/basecrack"><img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-logo.png" title="BaseCrack" alt="basecrack"></a>
 </p>
 <h1 align="center">BaseCrack</h1>
-<h4 align="center">Best Base Encoding Scheme Decoder</h4>
+<h4 align="center">Best Decoder Tool For Base Encoding Schemes</h4>
 <p align="center">
 	<img src="https://img.shields.io/badge/version-1.0.0-blue.svg" title="version" alt="version">
 	<a href="https://github.com/mufeedvh/basecrack/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/mufeedvh/basecrack.svg"></a>
