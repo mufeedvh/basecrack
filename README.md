@@ -6,6 +6,7 @@
 <p align="center">
 	<img src="https://img.shields.io/badge/version-1.0.0-blue.svg" title="version" alt="version">
 	<a href="https://github.com/mufeedvh/basecrack/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/mufeedvh/basecrack.svg"></a>
+	<a href="https://twitter.com/intent/tweet?text=Check%20this%20out!%20A%20tool%20to%20decode%20all%20types%20of%20Base%20Encoding%20Schemes.%20Will%20be%20really%20useful%20for%20CTFs%20and%20Cryptography:&url=https%3A%2F%2Fgithub.com%2Fmufeedvh%2Fbasecrack"><img alt="Twitter" src="https://img.shields.io/twitter/url/https/github.com/mufeedvh/basecrack.svg?style=social"></a>
 </p>
 <p align="center">
 	<img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-tool.png" title="BaseCrack Tool" alt="basecrack tool">
