@@ -1,0 +1,5 @@
+argparse==1.4.0
+termcolor==1.1.0
+base58==1.0.3
+base91==1.0.1
+base92==1.0.3
