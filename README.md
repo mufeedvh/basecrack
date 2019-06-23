@@ -38,7 +38,7 @@ Decode Base16, Base32, Base36, Base58, Base62, Base64, Base64Url, Base85, Base91
 
 ## Screenshots
 <p align="center">
-<img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/screenshot-0.png" title="Screenshot" alt="basecrack screenshot">
+<img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/screenshot.png" title="Screenshot" alt="basecrack screenshot">
 </p>
 
 ## Installation
