@@ -1,5 +1,7 @@
 argparse==1.4.0
 termcolor==1.1.0
+base36==0.1.1
 base58==1.0.3
+base-62==0.1.1
 base91==1.0.1
 base92==1.0.3
