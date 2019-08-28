@@ -10,14 +10,14 @@ __github__  = "https://github.com/mufeedvh"
 import re
 import argparse
 from termcolor import colored
+import base36
+import base58
+import base62
+import base64
+import base91
 
 # compatibility handling
 try:
-	import base36
-	import base58
-	import base62
-	import base64
-	import base91
 	import base92
 except ImportError:
 	print(colored("\nBaseCrack is not compatible with Python3, use Python2.\n", "red"))
