@@ -190,7 +190,8 @@ def main():
         print(colored("Decoding Base Data From ", "green")+colored(str(args.file), "red"))
         # triggering the 'decode base from file' function from basecrack class with the input file
         BaseCrack(str(args.file), args.output).decode_base_from_file()
-        print(colored("\nOutput Generated Successfully > ", "green")+colored(args.output+"\n", "yellow"))
+        if args.output:
+            print(colored("\nOutput Generated Successfully > ", "green")+colored(args.output+"\n", "yellow"))
     elif args.base:
         print(colored("Encoded Base: ", "yellow")+colored(str(args.base), "red"))
         # triggering the 'decode base' function directly from basecrack class with the base argument
