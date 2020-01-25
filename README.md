@@ -18,7 +18,7 @@
 
 Decode Base16, Base32, Base36, Base58, Base62, Base64, Base64Url, Base85, Base91, Base92 and more with the best base encoding scheme decoding tool in town. Mostly used for **CTFs** and **Cryptography**.
 
-What's new in v1.1.0: I heard your feature requests, now you can generate a wordlist with the decoded bases! :)
+<b>What's new in v1.1.0:</b> I heard your feature requests, now you can generate a wordlist with the decoded bases! :)
 
 ------------
 
@@ -36,7 +36,7 @@ What's new in v1.1.0: I heard your feature requests, now you can generate a word
 
 ## Main Features
 - Can decode multiple base encodings from a file
-- Generate a wordlist with the decoded bases
+- <b>Generate a wordlist with the decoded bases</b>
 - Predicts the type of encoding scheme
 
 ## Screenshots
