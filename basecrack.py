@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 __author__  = "Mufeed VH"
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 __email__   = "contact@mufeedvh.com"
 __github__  = "https://github.com/mufeedvh"
 
@@ -26,9 +26,9 @@ except ImportError:
 
 # basecrack class containing all the base decoding methods
 class BaseCrack:
-    def __init__(self, encoded_base, wordlist=None):
+    def __init__(self, encoded_base, output=None):
         self.encoded_base = encoded_base
-        self.wordlist = wordlist
+        self.output = output
 
     # decoding a single encoded base 
     def decode_base(self):
@@ -135,9 +135,10 @@ class BaseCrack:
                 # identifying the encoding type with regex pattern matching
                 if re.match("^[A-Za-z0-9_ ]*$", results[x]):
                     # printing the predicted encoding type
-                    print(colored("\nThe accurate base encoding type is probably ", "red")+colored(encoding_type[x], "green"))
-                    if self.wordlist != None:
-                        open(self.wordlist, 'a').write(results[x]+"\n")
+                    print(colored("\nThe accurate base encoding type is probably ", "red")+colored(encoding_type[x], "green")) 
+                    # generating the wordlist/output file with the decoded bases
+                    if self.output != None:
+                        open(self.output, 'a').write(results[x]+"\n")
 
     # fetching a set of base encodings from input file and passing it to 'decode_base' function to decode it all
     def decode_base_from_file(self):
@@ -178,19 +179,19 @@ def main():
     parser.add_argument('-b', '--base', help='Decode a single encoded base from argument')
     # to accept argument '-f' or '--file' to decode multiple encoded bases from a file
     parser.add_argument('-f', '--file', help='Decode multiple encoded bases from a file')
-    # to accept argument '-w' or '--wordlist' to enable wordlist generator mode, the wordlist name should be given as the value of this argument
-    parser.add_argument('-w', '--wordlist', help='Generate a wordlist with the decoded bases, provide filename as the value (only works when decoding bases from a file)')
+    # to accept argument '-o' or '--output' to enable wordlist generator mode, the output filename should be given as the value
+    parser.add_argument('-o', '--output', help='Generate a wordlist/output with the decoded bases, provide filename as the value (only works when decoding bases from a file)')
     args = parser.parse_args()
 
-    if args.wordlist:
-        print(colored("\n[>] ", "yellow")+colored("Enabled Wordlist Generator Mode :: ", "green")+colored(args.wordlist+"\n", "blue"))
+    if args.output:
+        print(colored("\n[>] ", "yellow")+colored("Enabled Wordlist Generator Mode :: ", "green")+colored(args.output+"\n", "blue"))
 
     # decodes base encodings from file if argument is given, else it accepts a single encoded base from user
     if args.file:
         print(colored("Decoding Base Data From ", "green")+colored(str(args.file), "red"))
         # triggering the 'decode base from file' function from basecrack class with the input file
-        BaseCrack(str(args.file), args.wordlist).decode_base_from_file()
-        print(colored("\nWordlist Generated Successfully > ", "green")+colored(args.wordlist+"\n", "yellow"))     
+        BaseCrack(str(args.file), args.output).decode_base_from_file()
+        print(colored("\nOutput Generated Successfully > ", "green")+colored(args.output+"\n", "yellow"))
     elif args.base:
         print(colored("Encoded Base: ", "yellow")+colored(str(args.base), "red"))
         # triggering the 'decode base' function directly from basecrack class with the base argument
