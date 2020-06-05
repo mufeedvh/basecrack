@@ -38,7 +38,7 @@ IX(Fp@nNG6ef<,*TFE]IT^zdINAb9EVbp,e<u=O6nN)/u+MTnU;Fo#VvQ&cK;mLZI#Jbdook<O{W#+gY
 ```
 and see for yourself! :)
 
-**API:** BaseCrack can now be used as a library! Just import the `BaseCrack` class and call the `decode()` function. See example below.
+**API:** BaseCrack can now be used as a library! Just import the `BaseCrack()` class and call the `decode()` function. See example below.
 
 ------------
 
