@@ -8,9 +8,8 @@
 	<a href="https://github.com/mufeedvh/basecrack/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/mufeedvh/basecrack.svg"></a>
 	<a href="https://twitter.com/intent/tweet?text=Check%20this%20out!%20A%20tool%20to%20decode%20all%20types%20of%20Base%20Encoding%20Schemes.%20Will%20be%20really%20useful%20for%20CTFs%20and%20Cryptography:&url=https%3A%2F%2Fgithub.com%2Fmufeedvh%2Fbasecrack"><img alt="Twitter" src="https://img.shields.io/twitter/url/https/github.com/mufeedvh/basecrack.svg?style=social"></a>
 </p>
-<p align="center">
-	<img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-tool.png" title="BaseCrack Tool" alt="basecrack tool" height="342px" width="788px">
-</p>
+
+![basecrack tool](https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-tool.png)
 
 ------------
 
@@ -28,9 +27,7 @@ Now you can **decode multi-encoded bases** of any pattern in a single shot.
 
 Have you ever stumbled upon that one lame CTF challenge that gives you an encoded string which is just encoded over and over with Base64, Base91, Base85 and so on? Just give that to BaseCrack and you're done with it! ;)
 
-<p align="center">
-    <img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-magic-mode.png" title="BaseCrack Tool" alt="basecrack magic mode" height="701px" width="802px">
-</p>
+![basecrack magic mode](https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-magic-mode.png)
 
 Want to test it out? Just give it this input:
 ```
@@ -61,9 +58,8 @@ and see for yourself! :)
 - Predicts the type of encoding scheme.
 
 ## Screenshots
-<p align="center">
-<img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-screenshot.png" title="Screenshot" alt="basecrack screenshot" height="693px" width="779px">
-</p>
+
+![basecrack screenshot](https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-screenshot.png)
 
 ## Installation
     $ git clone https://github.com/mufeedvh/basecrack.git
