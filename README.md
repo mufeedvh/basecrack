@@ -22,7 +22,7 @@ Decode Base16, Base32, Base36, Base58, Base62, Base64, Base64Url, Base85, Base91
 
 ## What's new in v2.0:
 
-_**Now supports both Python2 and Python3**_
+_**Now BaseCrack supports both Python2 and Python3**_
 
 Now you can decode multi-encoded bases of any pattern in a single shot.
 
