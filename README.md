@@ -9,7 +9,7 @@
 	<a href="https://twitter.com/intent/tweet?text=Check%20this%20out!%20A%20tool%20to%20decode%20all%20types%20of%20Base%20Encoding%20Schemes.%20Will%20be%20really%20useful%20for%20CTFs%20and%20Cryptography:&url=https%3A%2F%2Fgithub.com%2Fmufeedvh%2Fbasecrack"><img alt="Twitter" src="https://img.shields.io/twitter/url/https/github.com/mufeedvh/basecrack.svg?style=social"></a>
 </p>
 <p align="center">
-	<img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-tool.png" title="BaseCrack Tool" alt="basecrack tool" height="142px" width="588px">
+	<img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-tool.png" title="BaseCrack Tool" alt="basecrack tool" height="242px" width="688px">
 </p>
 
 ------------
