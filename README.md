@@ -38,6 +38,8 @@ IX(Fp@nNG6ef<,*TFE]IT^zdINAb9EVbp,e<u=O6nN)/u+MTnU;Fo#VvQ&cK;mLZI#Jbdook<O{W#+gY
 ```
 and see for yourself! :)
 
+**API:** BaseCrack can now be used as a library! Just import the `BaseCrack` class and call the `decode()` function. See example below.
+
 ------------
 
 ## Supported Encoding Schemes
@@ -89,6 +91,34 @@ To decode multiple base encodings from a file **(-f/--file)**:
 To generate a wordlist/output with the decoded bases **(-o/--output)**:
 
     python basecrack.py -f file.txt -o output-wordlist.txt
+
+
+## API
+
+Want to use BaseCrack as a library? We got you covered!
+
+Just get the `basecrack.py` and put it in your project's folder and you're ready to go!
+
+**Example:**
+
+```python
+# import the BaseCrack class from basecrack.py
+from basecrack import BaseCrack
+
+# calling the api function decode() with the encoded base
+result = BaseCrack().decode('c3BhZ2hldHRp')
+
+# printing the output
+"""
+result is tuple where:
+result[0] = DECODED STRING
+result[1] = ENCODING SCHEME
+"""
+print('Decoded String: {}'.format(result[0]))
+print('Encoding Scheme: {}'.format(result[1]))
+```
+
+Time to integrate this into your automation tools! ;)
 
 ## Contribution
 Ways to contribute
