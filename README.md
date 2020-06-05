@@ -20,7 +20,7 @@ Decode Base16, Base32, Base36, Base58, Base62, Base64, Base64Url, Base85, Base91
 
 **What's new in v1.1:** I heard your feature requests, now you can generate a wordlist/output with the decoded bases! :)
 
-# What's new in v2.0:
+## What's new in v2.0:
 
 _**Now supports both Python2 and Python3**_
 
@@ -99,7 +99,7 @@ Licensed under the MIT License, see <a href="https://github.com/mufeedvh/basecra
 
 Support the author by buying him a coffee!
 
-<a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/mufeedvh"><img src="https://bmc-cdn.nyc3.digitaloceanspaces.com/BMC-button-images/BMC-btn-logo.svg" alt="Buy me a Coffee"><span style="margin-left:5px">Buy me a Coffee</span></a>
+<a href="https://www.buymeacoffee.com/mufeedvh" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
 
 ------------
 
