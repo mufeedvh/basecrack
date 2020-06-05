@@ -118,6 +118,13 @@ print('Decoded String: {}'.format(result[0]))
 print('Encoding Scheme: {}'.format(result[1]))
 ```
 
+_Output:_
+
+```
+Decoded String: spaghetti
+Encoding Scheme: Base64
+```
+
 Time to integrate this into your automation tools! ;)
 
 ## Contribution
