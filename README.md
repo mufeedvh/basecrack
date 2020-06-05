@@ -93,7 +93,7 @@ To generate a wordlist/output with the decoded bases **(-o/--output)**:
 
 Want to use BaseCrack as a library? We got you covered!
 
-Just get the `basecrack.py` and put it in your project's folder and you're ready to go!
+Just put `basecrack` in your project's folder and you're ready to go!
 
 **Example:**
 
