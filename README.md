@@ -118,7 +118,7 @@ print('Decoded String: {}'.format(result[0]))
 print('Encoding Scheme: {}'.format(result[1]))
 ```
 
-_Output:_
+**Output:**
 
 ```
 Decoded String: spaghetti
