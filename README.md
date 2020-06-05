@@ -60,7 +60,7 @@ and see for yourself! :)
 
 ## Screenshots
 <p align="center">
-<img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-screenshot.png" title="Screenshot" alt="basecrack screenshot" height="480" width="600">
+<img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-screenshot.png" title="Screenshot" alt="basecrack screenshot" height="460" width="610">
 </p>
 
 ## Installation
