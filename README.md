@@ -9,7 +9,7 @@
 	<a href="https://twitter.com/intent/tweet?text=Check%20this%20out!%20A%20tool%20to%20decode%20all%20types%20of%20Base%20Encoding%20Schemes.%20Will%20be%20really%20useful%20for%20CTFs%20and%20Cryptography:&url=https%3A%2F%2Fgithub.com%2Fmufeedvh%2Fbasecrack"><img alt="Twitter" src="https://img.shields.io/twitter/url/https/github.com/mufeedvh/basecrack.svg?style=social"></a>
 </p>
 <p align="center">
-	<img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-tool.png" title="BaseCrack Tool" alt="basecrack tool" height="350" width="600">
+	<img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-tool.png" title="BaseCrack Tool" alt="basecrack tool" height="350" width="550">
 </p>
 
 ------------
@@ -28,7 +28,9 @@ Now you can decode multi-encoded bases of any pattern in a single shot.
 
 Have you ever stumbled upon that one lame CTF challenge that gives you an encoded string which is just encoded over and over with Base64, Base91, Base85 and so on? Just give that to BaseCrack and you're done with it! ;)
 
-<img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-magic-mode.png" title="BaseCrack Tool" alt="basecrack magic mode" height="350" width="600">
+<p align="center">
+    <img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-magic-mode.png" title="BaseCrack Tool" alt="basecrack magic mode" height="450" width="600">
+</p>
 
 Want to test it out? Just give it this input: `IX(Fp@nNG6ef<,*TFE]IT^zdINAb9EVbp,e<u=O6nN)/u+MTnU;Fo#VvQ&cK;mLZI#Jbdook<O{W#+gY%ooe#6pTkTa.9YPU8Uc=pl9BhSM9%kISw2k:8..u/6F2BwNndPZ2o#7NHNP3g,HlZu><*[Nv+T8` and see for yourself! :)
 
@@ -54,7 +56,7 @@ Want to test it out? Just give it this input: `IX(Fp@nNG6ef<,*TFE]IT^zdINAb9EVbp
 
 ## Screenshots
 <p align="center">
-<img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-screenshot.png" title="Screenshot" alt="basecrack screenshot" height="400" width="600">
+<img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-screenshot.png" title="Screenshot" alt="basecrack screenshot" height="450" width="600">
 </p>
 
 ## Installation
