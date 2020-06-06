@@ -23,6 +23,8 @@ Decode Base16, Base32, Base36, Base58, Base62, Base64, Base64Url, Base85, Base91
 
 _**Now BaseCrack supports both Python2 and Python3**_
 
+## Magic Mode
+
 Now you can **decode multi-encoded bases** of any pattern in a single shot.
 
 Have you ever stumbled upon that one lame CTF challenge that gives you an encoded string which is just encoded over and over with Base64, Base91, Base85 and so on? Just give that to BaseCrack and you're done with it! ;)
