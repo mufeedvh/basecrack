@@ -23,7 +23,7 @@ Decode Base16, Base32, Base36, Base58, Base62, Base64, Base64Url, Base85, Base91
 
 _**Now BaseCrack supports both Python2 and Python3**_
 
-## Magic Mode
+## Magic Mode 🔥
 
 Now you can **decode multi-encoded bases** of any pattern in a single shot.
 
