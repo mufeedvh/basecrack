@@ -151,7 +151,6 @@ class BaseCrack:
             # decoding as base92
             try:
                 base92_decode = base92.decode(encoded_base)
-                print(base92_decode)
                 if not contains_replacement_char(base92_decode):
                     encoding_type.append('Base92')
                     results.append(base92_decode)
