@@ -137,6 +137,17 @@ class BaseCrack:
             except:
                 pass
 
+            # decoding as ascii85
+            try:
+                ascii85_decode = base64.a85decode(encoded_base).decode('utf-8', 'replace')
+                if not contains_replacement_char(ascii85_decode):
+                    encoding_type.append('Ascii85')
+                    results.append(ascii85_decode)
+                    if not self.api_call:
+                        print(colored('\n[>] Decoding as Ascii85: ', 'blue') + colored(ascii85_decode, 'green'))
+            except:
+                pass
+
             # decoding as base91
             try:
                 base91_decode = base91.decode(encoded_base).decode('utf-8', 'replace')
