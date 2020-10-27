@@ -3,5 +3,5 @@ colorama
 termcolor
 base36
 base58
-base-62
+pybase62
 base91

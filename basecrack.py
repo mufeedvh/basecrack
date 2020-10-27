@@ -95,7 +95,7 @@ class BaseCrack:
 
             # decoding as base62
             try:
-                base62_decode = base62.encode(int(encoded_base)).decode('utf-8', 'replace')
+                base62_decode = base62.decodebytes(encoded_base).decode('utf-8', 'replace')
                 if not contains_replacement_char(base62_decode):
                     encoding_type.append('Base62')
                     results.append(base62_decode)
