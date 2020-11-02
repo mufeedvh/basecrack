@@ -95,7 +95,7 @@ class BaseCrack:
 
             # decoding as base62
             try:
-                base62_decode = base62.encode(int(encoded_base)).decode('utf-8', 'replace')
+                base62_decode = base62.decodebytes(encoded_base).decode('utf-8', 'replace')
                 if not contains_replacement_char(base62_decode):
                     encoding_type.append('Base62')
                     results.append(base62_decode)
@@ -134,6 +134,17 @@ class BaseCrack:
                     results.append(base85_decode)
                     if not self.api_call:
                         print(colored('\n[>] Decoding as Base85: ', 'blue')+colored(base85_decode, 'green'))
+            except:
+                pass
+
+            # decoding as ascii85
+            try:
+                ascii85_decode = base64.a85decode(encoded_base).decode('utf-8', 'replace')
+                if not contains_replacement_char(ascii85_decode):
+                    encoding_type.append('Ascii85')
+                    results.append(ascii85_decode)
+                    if not self.api_call:
+                        print(colored('\n[>] Decoding as Ascii85: ', 'blue') + colored(ascii85_decode, 'green'))
             except:
                 pass
 
