@@ -50,6 +50,7 @@ and see for yourself! :)
 - Base64
 - Base64Url
 - Base85
+- Ascii85
 - Base91
 - Base92
 
