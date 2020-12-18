@@ -36,10 +36,16 @@ class BaseCrack:
         contains_replacement_char() checks whether the decoded base
         contains an unknown unicode, ie: invalid character.
         these are replaced with 'replacement character',
-        which is '�' and 'U+FFFD' in unicode.
+        which is '�' and 'U+FFFD' in unicode and
+        also checks for unicode chars after `127`.
         """
         def contains_replacement_char(res):
-            return True if u'\ufffd' in res else False
+            if u'\ufffd' in res: return True
+            else:
+                count = 0
+                for char in res:
+                    if ord(char) > 127: count += 1
+                return True if count > 0 else False
 
         # to store the encoding schemes which haven't caused errors
         encoding_type = []
@@ -126,7 +132,7 @@ class BaseCrack:
             except:
                 pass
 
-            # decoding as base85
+            # decoding as base85 / ascii85
             try:
                 base85_decode = base64.b85decode(encoded_base).decode('utf-8', 'replace')
                 if not contains_replacement_char(base85_decode):
@@ -134,17 +140,6 @@ class BaseCrack:
                     results.append(base85_decode)
                     if not self.api_call:
                         print(colored('\n[>] Decoding as Base85: ', 'blue')+colored(base85_decode, 'green'))
-            except:
-                pass
-
-            # decoding as ascii85
-            try:
-                ascii85_decode = base64.a85decode(encoded_base).decode('utf-8', 'replace')
-                if not contains_replacement_char(ascii85_decode):
-                    encoding_type.append('Ascii85')
-                    results.append(ascii85_decode)
-                    if not self.api_call:
-                        print(colored('\n[>] Decoding as Ascii85: ', 'blue') + colored(ascii85_decode, 'green'))
             except:
                 pass
 
