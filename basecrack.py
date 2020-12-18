@@ -19,16 +19,18 @@ import base92
 
 
 class BaseCrack:
-    def __init__(self, output=None):
+    def __init__(self, output=None, magic_mode_call=False):
         self.output = output
         # initial bools
         self.api_call = False
+        self.magic_mode_call = magic_mode_call
+        self.b64_once = False
 
     # main decode function
     def decode_base(self, encoded_base):
         def contains_replacement_char(res):
             """
-            contains_replacement_char() checks whether the decoded base
+            `contains_replacement_char()` checks whether the decoded base
             contains an unknown unicode, ie: invalid character.
             these are replaced with 'replacement character',
             which is '�' and 'U+FFFD' in unicode and
@@ -48,11 +50,23 @@ class BaseCrack:
         results = []
 
         def process_decode(decode_string, scheme):
+            """
+            `process_decode()` stores the result if the encoding is valid
+            after checks from `contains_replacement_char()` and
+            prints the output if it isn't an API call
+            """
             if not contains_replacement_char(decode_string):
+                # don't repeat `base64url` when `base64` has already passed
+                if scheme == 'Base64': self.b64_once = True
+                if self.b64_once and (scheme == 'Base64URL'): return
+                
+                # append results to the respective lists
                 encoding_type.append(scheme)
                 results.append(decode_string)
+
                 if not self.api_call:
                     print(colored('\n[>] Decoding as {}: '.format(scheme), 'blue')+colored(decode_string, 'green'))
+
 
         # checking if input is not empty
         if len(encoded_base) != 0:
@@ -97,7 +111,7 @@ class BaseCrack:
                     base64.b64decode(encoded_base).decode('utf-8', 'replace'),
                     'Base64'
                 )
-            except: pass
+            except: pass            
             # decoding as base64url
             try:
                 process_decode(
@@ -137,24 +151,15 @@ class BaseCrack:
             if not results and not self.api_call:
                 quit(colored('\n[!] Not a valid encoding.\n', 'red'))
 
-            # algorithm to identify which type of base encoding the input is
+            # print/return the results
             for x in range(len(results)):
-                """
-                It runs through all the results and compares them
-                with a regex pattern of 'alphabets, numbers, and special characters'
-                thus ending up with the right result as false results will
-                contain invalid characters.
-                """
-                if re.match('[A-Za-z0-9$&+,:;=?@#|\'<>.^*()%!_-]', results[x]):
-                    if not self.api_call:
-                        # printing the predicted encoding type
-                        print(colored('\n[-] The Encoding Scheme Is ', 'blue')+colored(encoding_type[x], 'green')) 
-                        # generating the wordlist/output file with the decoded bases
-                        if self.output != None:
-                            open(self.output, 'a').write(results[x]+'\n')
-                    else:
-                        # return a tuple with the decoded base and encoding scheme if it's an api call
-                        return results[x], encoding_type[x]
+                if not self.api_call:
+                    print(colored('\n[-] The Encoding Scheme Is ', 'blue')+colored(encoding_type[x], 'green'))                    
+                    # generating the wordlist/output file with the decoded base
+                    if self.output != None:
+                        open(self.output, 'a').write(results[x]+'\n')
+                else:
+                    return results[x], encoding_type[x]
 
 
     def decode_base_from_file(self, file):
@@ -172,8 +177,8 @@ class BaseCrack:
                     # printing the encoded base
                     print(colored('\n[-] Encoded Base: ', 'yellow')+str(line.strip()))
 
-                    # calling the 'decode_base()' function to decode the current line
-                    self.decode_base(line)
+                    if self.magic_mode_call: self.magic_mode(line)
+                    else: self.decode_base(line)
 
                     # separating each decode results with some lines yo
                     print(colored('\n{{<<', 'red')+colored('='*70, 'yellow')+colored('>>}}', 'red'))
@@ -200,9 +205,6 @@ class BaseCrack:
 
     # magic mode tries to decode multi-encoded bases
     def magic_mode(self, encoded_base):
-        # magic mode uses the api function to decode every iteration
-        self.api_call = True
-
         iteration = 0
         result = None
         encoding_pattern = []
@@ -215,10 +217,12 @@ class BaseCrack:
                 decoded_string = result[0]
                 encoding_scheme = result[1]
                 encoding_pattern.append(encoding_scheme)
+
                 print(colored('\n[-] Iteration: ', 'green')+colored(iteration, 'blue'))
                 print(colored('\n[-] Heuristic Found Encoding To Be: ', 'yellow')+colored(encoding_scheme, 'green'))
                 print(colored('\n[-] Decoding as {}: '.format(encoding_scheme), 'blue')+colored(decoded_string, 'green'))
                 print(colored('\n{{<<', 'red')+colored('='*70, 'yellow')+colored('>>}}', 'red'))
+                
                 # setting the encoded bases and the current result for the next iteration
                 encoded_base = decoded_string
             else:
@@ -231,9 +235,13 @@ class BaseCrack:
             pattern = ' -> '.join(map(str, encoding_pattern))
             print(colored('\n[-] Encoding Pattern: ', 'green')+colored(pattern, 'blue'))
             print(colored('\n[-] Magic Decode Finished With Result: ', 'green')+colored(decoded_string, 'yellow', attrs=['bold']))
+
+            # generating the wordlist/output file with the decoded base
+            if self.output != None:
+                open(self.output, 'a').write(decoded_string+'\n')
+
             completion_time = str(end_time-start_time)[:6]
             print(colored('\n[-] Finished in ', 'green')+colored(completion_time, 'cyan', attrs=['bold'])+colored(' seconds\n', 'green'))
-            quit()
         else:
             quit(colored('\n[!] Not a valid encoding.\n', 'red'))
 
@@ -268,18 +276,16 @@ def main():
     """
     if args.file:
         if args.magic:
-            quit(colored('\n[!] Magic Mode doesn\'t work with DECODE_FROM_FILE mode.\n', 'red'))
-        # calling the 'decode_base_from_file()' with the input file
-        BaseCrack(args.output).decode_base_from_file(str(args.file))
-        if args.output:
-            print(colored('\n[-] Output Generated Successfully > ', 'green')+colored(args.output+'\n', 'yellow'))
+            BaseCrack(output=args.output, magic_mode_call=True).decode_base_from_file(str(args.file))
+        else:
+            BaseCrack(output=args.output).decode_base_from_file(str(args.file))    
+
     elif args.base:
         print(colored('[-] Encoded Base: ', 'yellow')+colored(str(args.base), 'red'))
 
-        if args.magic:
-            BaseCrack().magic_mode(str(args.base))
-        else:
-            BaseCrack().decode_base(str(args.base))
+        if args.magic: BaseCrack().magic_mode(str(args.base))
+        else: BaseCrack().decode_base(str(args.base))
+
     else:
         # input() for python2 is actually eval() :face_palm:
         if sys.version_info >= (3, 0):
@@ -287,10 +293,11 @@ def main():
         else:
             encoded_base = raw_input(colored('[>] Enter Encoded Base: ', 'yellow'))
 
-        if args.magic:
-            BaseCrack().magic_mode(encoded_base)
-        else:
-            BaseCrack().decode_base(encoded_base)
+        if args.magic: BaseCrack().magic_mode(encoded_base)
+        else: BaseCrack().decode_base(encoded_base)
+
+    if args.output:
+        print(colored('\n[-] Output Generated Successfully > ', 'green')+colored(args.output+'\n', 'yellow'))        
 
 if __name__ == '__main__':
     init()
