@@ -1,12 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-__author__  = 'Mufeed VH'
-__version__ = '2.0'
-__email__   = 'contact@mufeedvh.com'
-__github__  = 'https://github.com/mufeedvh/basecrack'
-
-# importing some required stuff
 import os
 import re
 import sys
@@ -32,14 +26,14 @@ class BaseCrack:
 
     # main decode function
     def decode_base(self, encoded_base):
-        """
-        contains_replacement_char() checks whether the decoded base
-        contains an unknown unicode, ie: invalid character.
-        these are replaced with 'replacement character',
-        which is '�' and 'U+FFFD' in unicode and
-        also checks for unicode chars after `127`.
-        """
         def contains_replacement_char(res):
+            """
+            contains_replacement_char() checks whether the decoded base
+            contains an unknown unicode, ie: invalid character.
+            these are replaced with 'replacement character',
+            which is '�' and 'U+FFFD' in unicode and
+            also checks for unicode chars after `127`.
+            """
             if u'\ufffd' in res: return True
             else:
                 count = 0
@@ -53,116 +47,91 @@ class BaseCrack:
         # to store the decoded results which haven't caused errors
         results = []
 
+        def process_decode(decode_string, scheme):
+            if not contains_replacement_char(decode_string):
+                encoding_type.append(scheme)
+                results.append(decode_string)
+                if not self.api_call:
+                    print(colored('\n[>] Decoding as {}: '.format(scheme), 'blue')+colored(decode_string, 'green'))
+
         # checking if input is not empty
         if len(encoded_base) != 0:
             # decoding as base16
             try:
-                base16_decode = base64.b16decode(encoded_base, casefold=False).decode('utf-8', 'replace')
-                if not contains_replacement_char(base16_decode):
-                    encoding_type.append('Base16')
-                    results.append(base16_decode)				
-                    if not self.api_call:
-                        print(colored('\n[>] Decoding as Base16: ', 'blue')+colored(base16_decode, 'green'))
+                process_decode(
+                    base64.b16decode(encoded_base, casefold=False).decode('utf-8', 'replace'),
+                    'Base16'
+                )
             except: pass
-
             # decoding as base32
             try:
-                base32_decode = base64.b32decode(encoded_base, casefold=False, map01=None).decode('utf-8', 'replace')
-                if not contains_replacement_char(base32_decode):
-                    encoding_type.append('Base32')
-                    results.append(base32_decode)
-                    if not self.api_call:
-                        print(colored('\n[>] Decoding as Base32: ', 'blue')+colored(base32_decode, 'green'))
+                process_decode(
+                    base64.b32decode(encoded_base, casefold=False, map01=None).decode('utf-8', 'replace'),
+                    'Base32'
+                )
             except: pass
-
             # decoding as base36
             try:
-                base36_decode = base36.dumps(int(encoded_base))
-                if not contains_replacement_char(base36_decode):
-                    encoding_type.append('Base36')
-                    results.append(base36_decode)
-                    if not self.api_call:
-                        print(colored('\n[>] Decoding as Base36: ', 'blue')+colored(base36_decode, 'green'))
+                process_decode(
+                    base36.dumps(int(encoded_base)),
+                    'Base36'
+                )
             except: pass
-
             # decoding as base58
             try:
-                base58_decode = base58.b58decode(encoded_base.encode()).decode('utf-8', 'replace')
-                if not contains_replacement_char(base58_decode):
-                    encoding_type.append('Base58')
-                    results.append(base58_decode)
-                    if not self.api_call:
-                        print(colored('\n[>] Decoding as Base58: ', 'blue')+colored(base58_decode, 'green'))
+                process_decode(
+                    base58.b58decode(encoded_base.encode()).decode('utf-8', 'replace'),
+                    'Base58'
+                )
             except: pass
-
             # decoding as base62
             try:
-                base62_decode = base62.decodebytes(encoded_base).decode('utf-8', 'replace')
-                if not contains_replacement_char(base62_decode):
-                    encoding_type.append('Base62')
-                    results.append(base62_decode)
-                    if not self.api_call:
-                        print(colored('\n[>] Decoding as Base62: ', 'blue')+colored(base62_decode, 'green'))
-            except: pass		
-
+                process_decode(
+                    base62.decodebytes(encoded_base).decode('utf-8', 'replace'),
+                    'Base62'
+                )
+            except: pass
             # decoding as base64
             try:
-                base64_decode = base64.b64decode(encoded_base).decode('utf-8', 'replace')
-                if not contains_replacement_char(base64_decode):
-                    encoding_type.append('Base64')
-                    results.append(base64_decode)
-                    if not self.api_call:
-                        print(colored('\n[>] Decoding as Base64: ', 'blue')+colored(base64_decode, 'green'))
+                process_decode(
+                    base64.b64decode(encoded_base).decode('utf-8', 'replace'),
+                    'Base64'
+                )
             except: pass
-
             # decoding as base64url
             try:
-                base64url_decode = base64.urlsafe_b64decode(encoded_base + '=' * (4 - len(encoded_base) % 4)).decode('utf-8', 'replace')
-                if not contains_replacement_char(base64url_decode):
-                    encoding_type.append('Base64URL')
-                    results.append(base64url_decode)
-                    if not self.api_call:
-                        print(colored('\n[>] Decoding as Base64URL: ', 'blue')+colored(base64url_decode, 'green'))
+                process_decode(
+                    base64.urlsafe_b64decode(encoded_base + '=' * (4 - len(encoded_base) % 4)).decode('utf-8', 'replace'),
+                    'Base64URL'
+                )
             except: pass
-
             # decoding as base85
             try:
-                base85_decode = base64.b85decode(encoded_base).decode('utf-8', 'replace')
-                if not contains_replacement_char(base85_decode):
-                    encoding_type.append('Base85')
-                    results.append(base85_decode)
-                    if not self.api_call:
-                        print(colored('\n[>] Decoding as Base85: ', 'blue')+colored(base85_decode, 'green'))
+                process_decode(
+                    base64.b85decode(encoded_base).decode('utf-8', 'replace'),
+                    'Base85'
+                )
             except: pass
-
             # decoding as ascii85
             try:
-                ascii85_decode = base64.a85decode(encoded_base).decode('utf-8', 'replace')
-                if not contains_replacement_char(ascii85_decode):
-                    encoding_type.append('Ascii85')
-                    results.append(ascii85_decode)
-                    if not self.api_call:
-                        print(colored('\n[>] Decoding as Ascii85: ', 'blue') + colored(ascii85_decode, 'green'))
-            except: pass            
-
+                process_decode(
+                    base64.a85decode(encoded_base).decode('utf-8', 'replace'),
+                    'Ascii85'
+                )
+            except: pass
             # decoding as base91
             try:
-                base91_decode = base91.decode(encoded_base).decode('utf-8', 'replace')
-                if not contains_replacement_char(base91_decode):
-                    encoding_type.append('Base91')
-                    results.append(base91_decode)
-                    if not self.api_call:
-                        print(colored('\n[>] Decoding as Base91: ', 'blue')+colored(base91_decode, 'green'))
+                process_decode(
+                    base91.decode(encoded_base).decode('utf-8', 'replace'),
+                    'Base91'
+                )
             except: pass
-
             # decoding as base92
             try:
-                base92_decode = base92.decode(encoded_base)
-                if not contains_replacement_char(base92_decode):
-                    encoding_type.append('Base92')
-                    results.append(base92_decode)
-                    if not self.api_call:
-                        print(colored('\n[>] Decoding as Base92: ', 'blue')+colored(base92_decode, 'green'))
+                process_decode(
+                    base92.decode(encoded_base),
+                    'Base92'
+                )
             except: pass
 
             if not results and not self.api_call:
@@ -185,13 +154,14 @@ class BaseCrack:
                             open(self.output, 'a').write(results[x]+'\n')
                     else:
                         # return a tuple with the decoded base and encoding scheme if it's an api call
-                        return (results[x], encoding_type[x])
-    
-    """
-    this function fetches the set of base encodings from the input file
-    and passes it to 'decode_base()' function to decode it all
-    """
+                        return results[x], encoding_type[x]
+
+
     def decode_base_from_file(self, file):
+        """
+        this function fetches the set of base encodings from the input file
+        and passes it to 'decode_base()' function to decode it all
+        """
         print(colored('[-] Decoding Base Data From ', 'cyan')+colored(file, 'yellow'))
         # opening the input file
         with open(file) as input_file:
@@ -208,22 +178,22 @@ class BaseCrack:
                     # separating each decode results with some lines yo
                     print(colored('\n{{<<', 'red')+colored('='*70, 'yellow')+colored('>>}}', 'red'))
 
-    # api decode function
-    """
-    API FUNCTION
-    ------------
-    the decode() function returns a tuple
-    with the structure:
-        ('DECODED_STRING', 'ENCODING SCHEME')
-        For example:
-            >> from basecrack import BaseCrack
-            >> BaseCrack().decode('c3BhZ2hldHRp')
-            ('spaghetti', 'Base64')
-        ie:
-            result[0] is the decoded string
-            result[1] is the encoding scheme
-    """	
+
     def decode(self, encoded_base):
+        """
+        API FUNCTION
+        ------------
+        the decode() function returns a tuple
+        with the structure:
+            ('DECODED_STRING', 'ENCODING SCHEME')
+            For example:
+                >> from basecrack import BaseCrack
+                >> BaseCrack().decode('c3BhZ2hldHRp')
+                ('spaghetti', 'Base64')
+            ie:
+                result[0] is the decoded string
+                result[1] is the encoding scheme
+        """
         self.api_call = True
         # api calls returns a tuple with the decoded base and the encoding scheme
         return self.decode_base(encoded_base)
