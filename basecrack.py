@@ -1,19 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import os
-import re
-import sys
-import time
-import argparse
+import os, re, sys, time, argparse
 from colorama import init
 from termcolor import colored
 
-import base36
-import base58
-import base62
-import base64
-import base91
+import base36, base58, base62, base64, base91
 sys.path.append(os.path.join(os.path.dirname(__file__), "lib"))
 import base92
 
