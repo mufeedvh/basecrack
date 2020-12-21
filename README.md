@@ -165,7 +165,7 @@ To generate a wordlist/output with the decoded bases **(-o/--output)**:
 
     python basecrack.py -f file.txt -o output-wordlist.txt
 
-**Unit Tests:** (Thanks @FavasM https://github.com/mufeedvh/basecrack/pull/8)
+**Unit Tests:** (Thanks [@FavasM](https://github.com/mufeedvh/basecrack/pull/8))
 
     python3 -m unittest discover -v -s tests
 
