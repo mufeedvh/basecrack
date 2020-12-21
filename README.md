@@ -30,7 +30,7 @@ I initially made this after being fed up with lame AF CTF challenges with multi-
 - Magic Mode now works with Wordlist Generator. :fire:
 - Base64/Base64URL duplicate results fixed. ✅
 
-### EXIF Data Detection 📸
+## EXIF Data Detection 📸
 
 ![basecrack exif detection](https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-exif-detection.png)
 
@@ -38,7 +38,7 @@ I initially made this after being fed up with lame AF CTF challenges with multi-
 
     python basecrack.py -i examples/exif-example.jpg --exif
 
-### OCR Base Detection 🔎
+## OCR Base Detection 🔎
 
 ![basecrack ocr detection](https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-ocr-detection.png)
 
@@ -50,7 +50,7 @@ I initially made this after being fed up with lame AF CTF challenges with multi-
 
 _**Now BaseCrack supports both Python2 and Python3**_
 
-### Magic Mode 🪄
+## Magic Mode 🪄
 
 Now you can **decode multi-encoded bases** of any pattern in a single shot.
 
