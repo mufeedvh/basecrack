@@ -1,5 +1,5 @@
 <p align="center">
-	<a href="https://github.com/mufeedvh/basecrack"><img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-logo.png" title="BaseCrack" alt="basecrack" height="100" width="325"></a>
+	<a href="https://github.com/mufeedvh/basecrack"><img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-logo.png" title="BaseCrack" alt="basecrack" height="100" width="330"></a>
 </p>
 <h1 align="center">BaseCrack</h1>
 <h4 align="center">Decoder Tool For Base Encoding Schemes</h4>
