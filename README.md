@@ -98,10 +98,6 @@ I heard your feature requests, now you can generate a wordlist/output with the d
 - **Generate a wordlist/output with the decoded bases.**
 - Predicts the type of encoding scheme.
 
-## Screenshots
-
-![basecrack screenshot](https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-screenshot.png)
-
 ## Installation
 
     $ git clone https://github.com/mufeedvh/basecrack.git
