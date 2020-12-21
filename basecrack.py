@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import os, re, sys, time, argparse
+__author__  = 'Mufeed VH'
+__version__ = '3.0'
+__email__   = 'contact@mufeedvh.com'
+__github__  = 'https://github.com/mufeedvh/basecrack'
+
+import os, re, sys, time, platform, json, argparse
 from colorama import init
 from termcolor import colored
 
@@ -11,12 +16,16 @@ import base92
 
 
 class BaseCrack:
-    def __init__(self, output=None, magic_mode_call=False):
+    def __init__(self, output=None, magic_mode_call=False, quit_after_fail=True):
         self.output = output
         # initial bools
         self.api_call = False
         self.magic_mode_call = magic_mode_call
+        self.image_mode_call = False
+        self.quit_after_fail = quit_after_fail
         self.b64_once = False
+        self.b64_url = False
+        self.current_iter_base = None
 
     # main decode function
     def decode_base(self, encoded_base):
@@ -47,9 +56,10 @@ class BaseCrack:
             after checks from `contains_replacement_char()` and
             prints the output if it isn't an API call
             """
+            if len(decode_string) < 3: return
             if not contains_replacement_char(decode_string):
-                # don't repeat `base64url` when `base64` has already passed
-                if scheme == 'Base64': self.b64_once = True
+                # don't repeat `base64url` when `base64` has already passed and it's not a URL
+                if scheme == 'Base64' and '://' not in decode_string: self.b64_once = True
                 if self.b64_once and (scheme == 'Base64URL'): return
                 
                 # append results to the respective lists
@@ -57,11 +67,13 @@ class BaseCrack:
                 results.append(decode_string)
 
                 if not self.api_call:
+                    if self.image_mode_call:
+                        print(colored('\n[-] Attempting Base: ', 'yellow')+colored(self.current_iter_base, 'red'))
                     print(colored('\n[>] Decoding as {}: '.format(scheme), 'blue')+colored(decode_string, 'green'))
 
 
-        # checking if input is not empty
-        if len(encoded_base) != 0:
+        # checking if input is valid in length
+        if len(encoded_base) > 3:
             # decoding as base16
             try:
                 process_decode(
@@ -141,38 +153,39 @@ class BaseCrack:
             except: pass
 
             if not results and not self.api_call:
-                quit(colored('\n[!] Not a valid encoding.\n', 'red'))
+                if not self.image_mode_call:
+                    print(colored('\n[!] Not a valid encoding.\n', 'red'))
+                if self.quit_after_fail: quit()
 
             # print/return the results
-            for x in range(len(results)):
+            for x in range(len(results)):          
                 if not self.api_call:
-                    print(colored('\n[-] The Encoding Scheme Is ', 'blue')+colored(encoding_type[x], 'green'))                    
+                    print(colored('\n[-] The Encoding Scheme Is ', 'blue')+colored(encoding_type[x], 'green'))
                     # generating the wordlist/output file with the decoded base
                     if self.output != None:
                         open(self.output, 'a').write(results[x]+'\n')
                 else:
                     return results[x], encoding_type[x]
 
+            if self.image_mode_call and results:
+                print(colored('\n{{<<', 'red')+colored('='*70, 'yellow')+colored('>>}}', 'red'))
 
-    def decode_base_from_file(self, file):
+
+    def decode_from_file(self, file):
         """
-        this function fetches the set of base encodings from the input file
+        `decode_from_file()` fetches the set of base encodings from the input file
         and passes it to 'decode_base()' function to decode it all
         """
         print(colored('[-] Decoding Base Data From ', 'cyan')+colored(file, 'yellow'))
-        # opening the input file
+
         with open(file) as input_file:
             # reading each line from the file
             for line in input_file:
                 # checking if the line/base is not empty
                 if len(line) > 1:
-                    # printing the encoded base
                     print(colored('\n[-] Encoded Base: ', 'yellow')+str(line.strip()))
-
                     if self.magic_mode_call: self.magic_mode(line)
                     else: self.decode_base(line)
-
-                    # separating each decode results with some lines yo
                     print(colored('\n{{<<', 'red')+colored('='*70, 'yellow')+colored('>>}}', 'red'))
 
 
@@ -180,7 +193,7 @@ class BaseCrack:
         """
         API FUNCTION
         ------------
-        the decode() function returns a tuple
+        the `decode()` function returns a tuple
         with the structure:
             ('DECODED_STRING', 'ENCODING SCHEME')
             For example:
@@ -195,8 +208,11 @@ class BaseCrack:
         # api calls returns a tuple with the decoded base and the encoding scheme
         return self.decode_base(encoded_base)
 
-    # magic mode tries to decode multi-encoded bases
+
     def magic_mode(self, encoded_base):
+        """
+        `magic_mode()` tries to decode multi-encoded bases of any pattern
+        """
         iteration = 0
         result = None
         encoding_pattern = []
@@ -237,6 +253,54 @@ class BaseCrack:
         else:
             quit(colored('\n[!] Not a valid encoding.\n', 'red'))
 
+
+    def decode_from_image(self, image, mode):
+        """
+        `decode_from_image()` AKA "lame_steganography_challenge_solving_automated()" has two modes:
+            - OCR Detection Mode: dectects base encodings in images
+            - EXIF Data Mode: detects base encodings in an image's EXIF data
+        """
+        self.image_mode_call = True
+        if mode == 'exif':
+            import exifread
+            read_image = open(image, 'rb')
+            exif_tags = exifread.process_file(read_image)
+
+            for tag in exif_tags:
+                split_tag = str(exif_tags[tag]).split(' ')
+                for base in split_tag:
+                    if len(base) < 3 or '\\x' in base: continue
+                    for base in base.splitlines():
+                        self.current_iter_base = base
+                        if self.magic_mode_call: self.magic_mode(base)
+                        else: self.decode_base(base)
+        elif mode == 'ocr':
+            import cv2, pytesseract
+
+            # import tesseract for windows
+            if platform.system() == 'Windows':
+                load_config = json.loads(open('config.json', 'r').read())
+                if len(load_config) > 0:
+                    # load 32/64 bit executables
+                    if sys.maxsize > 2**32:
+                        # 64 bit
+                        tesseract_path = load_config['tesseract_path']['32bit']
+                    else:
+                        # 32 bit
+                        tesseract_path = load_config['tesseract_path']['64bit']
+                # raw string to treat `\` as a literal character
+                pytesseract.pytesseract.tesseract_cmd = r'{}'.format(tesseract_path)
+
+            read_image = cv2.imread(image)
+            get_text = pytesseract.image_to_string(read_image)
+            strings_from_img = str(get_text).replace(' ', '')
+            # cleaning the detected string with valid base chars for accurary
+            base = re.sub('[^A-Za-z0-9+/=@]', '', strings_from_img)
+            self.current_iter_base = base
+            if self.magic_mode_call: self.magic_mode(base)
+            else: self.decode_base(base)
+
+
 # print a kickass banner to look cool
 def banner():
     banner = '''
@@ -245,7 +309,7 @@ def banner():
 ██████╔╝███████║███████╗█████╗  ██║     ██████╔╝███████║██║     █████╔╝ 
 ██╔══██╗██╔══██║╚════██║██╔══╝  ██║     ██╔══██╗██╔══██║██║     ██╔═██╗ 
 ██████╔╝██║  ██║███████║███████╗╚██████╗██║  ██║██║  ██║╚██████╗██║  ██╗
-╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
+╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝ v3.0
     '''
     print(colored(banner, 'red')+colored('\n\t\tpython basecrack.py -h [FOR HELP]\n', 'green'))
 
@@ -256,6 +320,11 @@ def main():
     parser.add_argument('-b', '--base', help='Decode a single encoded base from argument.')
     parser.add_argument('-f', '--file', help='Decode multiple encoded bases from a file.')
     parser.add_argument('-m', '--magic', help='Decode multi-encoded bases in one shot.', action='store_true')
+
+    parser.add_argument('-i', '--image', help='Decode base encodings from image with OCR detection or EXIF data.')
+    parser.add_argument('-c', '--ocr', help='OCR detection mode.', action='store_true')
+    parser.add_argument('-e', '--exif', help='EXIF data detection mode. (default)', action='store_true')
+
     parser.add_argument('-o', '--output', help='Generate a wordlist/output with the decoded bases, enter filename as the value.')
     args = parser.parse_args()
 
@@ -267,16 +336,33 @@ def main():
     else it accepts a single encoded base from user
     """
     if args.file:
-        if args.magic:
-            BaseCrack(output=args.output, magic_mode_call=True).decode_base_from_file(str(args.file))
-        else:
-            BaseCrack(output=args.output).decode_base_from_file(str(args.file))    
+        if args.magic: BaseCrack(output=args.output, magic_mode_call=True).decode_from_file(str(args.file))
+        else: BaseCrack(output=args.output).decode_from_file(str(args.file))
 
     elif args.base:
         print(colored('[-] Encoded Base: ', 'yellow')+colored(str(args.base), 'red'))
 
         if args.magic: BaseCrack().magic_mode(str(args.base))
         else: BaseCrack().decode_base(str(args.base))
+
+    elif args.image:
+        print(colored('[-] Input Image: ', 'yellow')+colored(str(args.image), 'red'))       
+
+        if args.ocr: mode = 'ocr'
+        elif args.exif: mode = 'exif'
+        else: mode = 'exif' # default
+
+        if mode == 'ocr':
+            print(
+                colored('\n[INFO] There is only a 2/10 chance it would perfectly decode it.', 'yellow')
+            )            
+
+        if args.magic: BaseCrack(output=args.output, magic_mode_call=True, quit_after_fail=False).decode_from_image(str(args.image), mode)
+        else: BaseCrack(quit_after_fail=False).decode_from_image(str(args.image), mode)
+
+        print(
+            colored('\n[INFO] Some of the output may look gibberish but they\'re valid bases, hence shown.\n', 'green')
+        )
 
     else:
         # input() for python2 is actually eval() :face_palm:

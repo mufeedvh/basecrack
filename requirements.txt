@@ -5,3 +5,6 @@ base36
 base58
 pybase62
 base91
+exifread
+opencv-python
+pytesseract

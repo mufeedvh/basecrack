@@ -2,9 +2,9 @@
 	<a href="https://github.com/mufeedvh/basecrack"><img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-logo.png" title="BaseCrack" alt="basecrack" height="100" width="320"></a>
 </p>
 <h1 align="center">BaseCrack</h1>
-<h4 align="center">Best Decoder Tool For Base Encoding Schemes</h4>
+<h4 align="center">Decoder Tool For Base Encoding Schemes</h4>
 <p align="center">
-	<img src="https://img.shields.io/badge/version-2.0-blue.svg" title="version" alt="version">
+	<img src="https://img.shields.io/badge/version-3.0-blue.svg" title="version" alt="version">
 	<a href="https://github.com/mufeedvh/basecrack/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/mufeedvh/basecrack.svg"></a>
 	<a href="https://twitter.com/intent/tweet?text=Check%20this%20out!%20A%20tool%20to%20decode%20all%20types%20of%20Base%20Encoding%20Schemes.%20Will%20be%20really%20useful%20for%20CTFs%20and%20Cryptography:&url=https%3A%2F%2Fgithub.com%2Fmufeedvh%2Fbasecrack"><img alt="Twitter" src="https://img.shields.io/twitter/url/https/github.com/mufeedvh/basecrack.svg?style=social"></a>
 </p>
@@ -13,17 +13,44 @@
 
 ------------
 
-**BaseCrack** is a tool written in Python that can decode all alphanumeric base encoding schemes. This tool can accept single user input, multiple inputs from a file, input from argument, **multi-encoded bases** and decode them incredibly fast.
+**BaseCrack** is a tool written in Python that can decode all alphanumeric base encoding schemes. This tool can accept single user input, multiple inputs from a file, input from argument, **multi-encoded bases**, **bases in image EXIF data**, **bases on images with OCR** and decode them incredibly fast.
 
 Decode Base16, Base32, Base36, Base58, Base62, Base64, Base64Url, Base85, Ascii85, Base91, Base92 and more with the best base encoding scheme decoding tool in town. It's useful for **CTFs**, **Bug Bounty Hunting**, and **Cryptography**.
 
-**What's new in v1.1:** I heard your feature requests, now you can generate a wordlist/output with the decoded bases! :)
+I initially made this after being fed up with lame AF CTF challenges with multi-encoded bases in Cryprography challenges and now some of them started doing that in Steganography challenges so I automated that too smh!
 
-## What's new in v2.0:
+## Changelog
+
+**What's new in v3.0:**
+
+- **Decode bases in image EXIF data.** 📸
+- **Decode bases on images with OCR detection.** 🔎
+- 100% Accuracy. (+added charset validation along with replacement char checks) 💯
+- Magic Mode now works with File Read mode. :fire:
+- Magic Mode now works with Wordlist Generator. :fire:
+- Base64/Base64URL duplicate results fixed. ✅
+
+## EXIF Data Detection 📸
+
+![basecrack exif detection](https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-exif-detection.png)
+
+**Try It Yourself!**
+
+    python basecrack.py -i examples/exif-example.jpg --exif
+
+## OCR Base Detection 🔎
+
+![basecrack ocr detection](https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-ocr-detection.png)
+
+**Try It Yourself!**
+
+    python basecrack.py -i examples/ocr-example.jpg --ocr
+
+**What's new in v2.0:**
 
 _**Now BaseCrack supports both Python2 and Python3**_
 
-## Magic Mode
+### Magic Mode 🪄
 
 Now you can **decode multi-encoded bases** of any pattern in a single shot.
 
@@ -37,7 +64,13 @@ IX(Fp@nNG6ef<,*TFE]IT^zdINAb9EVbp,e<u=O6nN)/u+MTnU;Fo#VvQ&cK;mLZI#Jbdook<O{W#+gY
 ```
 and see for yourself! :)
 
-**API:** BaseCrack can now be used as a library! Just import the `BaseCrack()` class and call the `decode()` function. See example below.
+### [BaseCrack API](https://github.com/mufeedvh/basecrack#api)
+
+BaseCrack can now be used as a library! Just import the `BaseCrack()` class and call the `decode()` function. See example below.
+
+**What's new in v1.1:**
+
+I heard your feature requests, now you can generate a wordlist/output with the decoded bases! :)
 
 ------------
 
@@ -55,8 +88,11 @@ and see for yourself! :)
 - Base92
 
 ## Main Features
-- **Can decode multi-encoded bases of any pattern.**
-- Can decode multiple base encodings from a file.
+
+- **Decode multi-encoded bases of any pattern.**
+- **Decode bases in image EXIF data.**
+- **Decode bases on images with OCR detection.**
+- Dan decode multiple base encodings from a file.
 - **Generate a wordlist/output with the decoded bases.**
 - Predicts the type of encoding scheme.
 
@@ -65,12 +101,40 @@ and see for yourself! :)
 ![basecrack screenshot](https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-screenshot.png)
 
 ## Installation
+
     $ git clone https://github.com/mufeedvh/basecrack.git
     $ cd basecrack
     $ pip install -r requirements.txt
     $ python basecrack.py -h
 
+📝 **NOTE:** Python3 is recommended to use!
+
+**Linux:**
+
+    $ sudo apt-get update
+    $ sudo apt-get install tesseract-ocr libtesseract-dev
+
+**MacOS:**
+
+    $ brew install tesseract
+
+**Windows:**
+
+OCR Detection is implemented with [Tesseract](https://github.com/tesseract-ocr/tesseract) and Windows requires installation of the Tesseract executable. Installing the dependencies from `requirements.txt` which includes `pytesseract` should install it. If in case it doesn't, here's how you can set it up:
+
+1. First check whether you have it installed or not in the `Program Files`/`Program Files (x86)` under the `Tesseract-OCR` directory.
+2. If there is, give that path in the `config.json` and you're all set! If you don't have it, install it from [here](https://github.com/UB-Mannheim/tesseract/wiki) and set the path in `config.json`.
+
+**Tesseract Docs:** https://tesseract-ocr.github.io/
+
+📝 **NOTE:** I haven't completely tested this tool on Windows so if you stumble upon any issues, please [open an issue](https://github.com/mufeedvh/basecrack/issues/new).
+
 ## Usage
+
+Get a list of all the arguments:
+
+    python basecrack.py -h
+
 To decode a single base encoding from user input:
 
     python basecrack.py
@@ -87,10 +151,25 @@ To decode multiple base encodings from a file **(-f/--file)**:
 
     python basecrack.py --magic
 
+To input an image (NOTE: if you don't give a mode of detection, **EXIF** mode is selected as default) **(-i/--image)**:
+
+    python basecrack.py -i image.jpg (--exif/--ocr)
+
+**EXIF Data Detection:** To decode bases in image EXIF data **(-e/--exif)**:
+
+    python basecrack.py -i image.jpg --exif
+
+**OCR Base Detection:** To decode bases on image with OCR detection **(-c/--ocr)**:
+
+    python basecrack.py -i image.jpg --ocr
+
 To generate a wordlist/output with the decoded bases **(-o/--output)**:
 
     python basecrack.py -f file.txt -o output-wordlist.txt
 
+**Unit Tests:** (Thanks @FavasM https://github.com/mufeedvh/basecrack/pull/8)
+
+    python3 -m unittest discover -v -s tests
 
 ## API
 

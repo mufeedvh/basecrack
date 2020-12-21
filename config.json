@@ -1,0 +1,6 @@
+{
+    "tesseract_path": {
+        "32bit": "C:\\Program Files\\Tesseract-OCR\\tesseract.exe",
+        "64bit": "C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe"
+    }
+}
