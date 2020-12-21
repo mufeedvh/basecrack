@@ -149,7 +149,7 @@ To decode multiple base encodings from a file **(-f/--file)**:
 
     python basecrack.py --magic
 
-To input an image for EXIF/OCR detection mode **(-i/--image)**:
+To input an image for **EXIF/OCR** detection mode **(-i/--image)**:
 
     python basecrack.py -i image.jpg (--exif/--ocr)
 
