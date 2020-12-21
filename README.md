@@ -17,7 +17,7 @@
 
 Decode Base16, Base32, Base36, Base58, Base62, Base64, Base64Url, Base85, Ascii85, Base91, Base92 and more with the best base encoding scheme decoding tool in town. It's useful for **CTFs**, **Bug Bounty Hunting**, and **Cryptography**.
 
-I initially made this after being fed up with lame AF CTF challenges with multi-encoded bases in Cryprography challenges and now some of them started doing that in Steganography challenges so I automated that too smh!
+**FUN FACT:** I initially made this after being fed up with lame AF CTF challenges with multi-encoded bases in Cryprography challenges and now some of them started doing that in Steganography challenges so I automated that too smh!
 
 ## Changelog
 
