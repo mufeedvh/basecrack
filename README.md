@@ -66,7 +66,7 @@ and see for yourself! :)
 
 ### BaseCrack API
 
-BaseCrack can now be used as a library! Just import the `BaseCrack()` class and call the `decode()` function. See example below.
+BaseCrack can now be used as a library! Just import the `BaseCrack()` class and call the `decode()` function.
 
 See [**API**](https://github.com/mufeedvh/basecrack#api).
 
