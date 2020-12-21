@@ -165,10 +165,6 @@ To generate a wordlist/output with the decoded bases **(-o/--output)**:
 
     python basecrack.py -f file.txt -o output-wordlist.txt
 
-**Unit Tests:** (Thanks [@FavasM](https://github.com/mufeedvh/basecrack/pull/8))
-
-    python3 -m unittest discover -v -s tests
-
 ## API
 
 Want to use BaseCrack as a library? We got you covered!
@@ -210,6 +206,12 @@ Ways to contribute
 - Fix something and open a pull request
 - Help me document the code
 - Spread the word
+
+Before you open a PR, make sure everything's good with a Unit Test:
+
+**Unit Tests:** (Thanks [@FavasM](https://github.com/mufeedvh/basecrack/pull/8))
+
+    python3 -m unittest discover -v -s tests
 
 ## License
 Licensed under the MIT License, see <a href="https://github.com/mufeedvh/basecrack/blob/master/LICENSE">LICENSE</a> for more information.
