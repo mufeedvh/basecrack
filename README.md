@@ -64,7 +64,7 @@ IX(Fp@nNG6ef<,*TFE]IT^zdINAb9EVbp,e<u=O6nN)/u+MTnU;Fo#VvQ&cK;mLZI#Jbdook<O{W#+gY
 ```
 and see for yourself! :)
 
-### [BaseCrack API](https://github.com/mufeedvh/basecrack#api)
+**[BaseCrack API](https://github.com/mufeedvh/basecrack#api)**
 
 BaseCrack can now be used as a library! Just import the `BaseCrack()` class and call the `decode()` function. See example below.
 
