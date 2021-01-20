@@ -17,7 +17,10 @@
 
 Decode Base16, Base32, Base36, Base58, Base62, Base64, Base64Url, Base85, Ascii85, Base91, Base92 and more with the best base encoding scheme decoding tool in town. It's useful for **CTFs**, **Bug Bounty Hunting**, and **Cryptography**.
 
-I initially made this after being fed up with lame AF CTF challenges with multi-encoded bases in Cryprography challenges and now some of them started doing that in Steganography challenges so I automated that too smh!
+<details>
+  <summary>Fun Fact!</summary>
+    I initially made this after being fed up with lame AF CTF challenges with multi-encoded bases in Cryprography challenges and now some of them started doing that in Steganography challenges so I automated that too smh!  
+</details>
 
 ## Changelog
 
@@ -30,25 +33,9 @@ I initially made this after being fed up with lame AF CTF challenges with multi-
 - Magic Mode now works with Wordlist Generator. :fire:
 - Base64/Base64URL duplicate results fixed. ✅
 
-## EXIF Data Detection 📸
-
-![basecrack exif detection](https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-exif-detection.png)
-
-**Try It Yourself!**
-
-    python basecrack.py -i examples/exif-example.jpg --exif
-
-## OCR Base Detection 🔎
-
-![basecrack ocr detection](https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-ocr-detection.png)
-
-**Try It Yourself!**
-
-    python basecrack.py -i examples/ocr-example.jpg --ocr
-
 **What's new in v2.0:**
 
-_**Now BaseCrack supports both Python2 and Python3**_
+- Now BaseCrack supports both Python2 and Python3.
 
 ## Magic Mode 🪄
 
@@ -56,12 +43,17 @@ Now you can **decode multi-encoded bases** of any pattern in a single shot.
 
 Have you ever stumbled upon that one lame CTF challenge that gives you an encoded string which is just encoded over and over with Base64, Base91, Base85 and so on? Just give that to BaseCrack and you're done with it! ;)
 
-![basecrack magic mode](https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-magic-mode.png)
+<details>
+    <summary><b>Screenshot</b></summary>
+    <img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-magic-mode.png" alt="basecrack magic mode">
+</details>
 
 Want to test it out? Just give it this input:
+
 ```
 IX(Fp@nNG6ef<,*TFE]IT^zdINAb9EVbp,e<u=O6nN)/u+MTnU;Fo#VvQ&cK;mLZI#Jbdook<O{W#+gY%ooe#6pTkTa.9YPU8Uc=pl9BhSM9%kISw2k:8..u/6F2BwNndPZ2o#7NHNP3g,HlZu><*[Nv+T8
 ```
+
 and see for yourself! :)
 
 ### BaseCrack API
@@ -73,8 +65,6 @@ See [**API**](https://github.com/mufeedvh/basecrack#api).
 **What's new in v1.1:**
 
 I heard your feature requests, now you can generate a wordlist/output with the decoded bases! :)
-
-------------
 
 ## Supported Encoding Schemes
 - Base16
@@ -97,6 +87,8 @@ I heard your feature requests, now you can generate a wordlist/output with the d
 - Dan decode multiple base encodings from a file.
 - **Generate a wordlist/output with the decoded bases.**
 - Predicts the type of encoding scheme.
+
+------------
 
 ## Installation
 
@@ -198,6 +190,24 @@ Encoding Scheme: Base64
 ```
 
 Time to integrate this into your automation tools! ;)
+
+## Screenshots
+
+## EXIF Data Detection 📸
+
+![basecrack exif detection](https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-exif-detection.png)
+
+**Try It Yourself!**
+
+    python basecrack.py -i examples/exif-example.jpg --exif
+
+## OCR Base Detection 🔎
+
+![basecrack ocr detection](https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-ocr-detection.png)
+
+**Try It Yourself!**
+
+    python basecrack.py -i examples/ocr-example.jpg --ocr
 
 ## Contribution
 Ways to contribute
