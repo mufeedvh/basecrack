@@ -19,8 +19,15 @@ Decode Base16, Base32, Base36, Base58, Base62, Base64, Base64Url, Base85, Ascii8
 
 <details>
   <summary>Fun Fact!</summary>
-    I initially made this after being fed up with lame AF CTF challenges with multi-encoded bases in Cryprography challenges and now some of them started doing that in Steganography challenges so I automated that too smh!  
+  <br>	
+  I initially made this after being fed up with lame AF CTF challenges with multi-encoded bases in Cryprography challenges and now some of them started doing that in Steganography challenges so I automated that too smh!
 </details>
+
+---
+
+### Jump to [Usage](https://github.com/mufeedvh/basecrack#usage)
+
+---
 
 ## Changelog
 
@@ -28,10 +35,9 @@ Decode Base16, Base32, Base36, Base58, Base62, Base64, Base64Url, Base85, Ascii8
 
 - **Decode bases in image EXIF data.** 📸
 - **Decode bases on images with OCR detection.** 🔎
-- 100% Accuracy. (+added charset validation along with replacement char checks) 💯
+- Better Accuracy. (+added charset validation along with replacement char checks) 💯
 - Magic Mode now works with File Read mode. :fire:
 - Magic Mode now works with Wordlist Generator. :fire:
-- Base64/Base64URL duplicate results fixed. ✅
 
 **What's new in v2.0:**
 
