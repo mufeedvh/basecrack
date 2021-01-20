@@ -19,8 +19,13 @@ Decode Base16, Base32, Base36, Base58, Base62, Base64, Base64Url, Base85, Ascii8
 
 <details>
   <summary>Fun Fact!</summary>
+<<<<<<< HEAD
+    
+    I initially made this after being fed up with lame AF CTF challenges with multi-encoded bases in Cryprography challenges and now some of them started doing that in Steganography challenges so I automated that too smh!  
+=======
   <br>	
   I initially made this after being fed up with lame AF CTF challenges with multi-encoded bases in Cryprography challenges and now some of them started doing that in Steganography challenges so I automated that too smh!
+>>>>>>> 3ed7d4f85832d4266a7145497c9c455c5d06a878
 </details>
 
 ---
@@ -50,7 +55,7 @@ Now you can **decode multi-encoded bases** of any pattern in a single shot.
 Have you ever stumbled upon that one lame CTF challenge that gives you an encoded string which is just encoded over and over with Base64, Base91, Base85 and so on? Just give that to BaseCrack and you're done with it! ;)
 
 <details>
-    <summary><b>Screenshot</b></summary>
+    <summary><h3>Screenshot</h3></summary>
     <img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-magic-mode.png" alt="basecrack magic mode">
 </details>
 
@@ -216,6 +221,7 @@ Time to integrate this into your automation tools! ;)
     python basecrack.py -i examples/ocr-example.jpg --ocr
 
 ## Contribution
+
 Ways to contribute
 - Suggest a feature
 - Report a bug
