@@ -49,11 +49,7 @@ Now you can **decode multi-encoded bases** of any pattern in a single shot.
 
 Have you ever stumbled upon that one lame CTF challenge that gives you an encoded string which is just encoded over and over with Base64, Base91, Base85 and so on? Just give that to BaseCrack and you're done with it! ;)
 
-<details>
-    <summary><b>Screenshot</b></summary>
-    <br>
-    <img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-magic-mode.png" alt="basecrack magic mode">
-</details>
+<img src="https://raw.githubusercontent.com/mufeedvh/basecrack/master/assets/basecrack-magic-mode.png" alt="basecrack magic mode">
 
 Want to test it out? Just give it this input:
 
