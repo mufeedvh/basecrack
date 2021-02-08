@@ -15,7 +15,7 @@
 
 **BaseCrack** is a tool written in Python that can decode all alphanumeric base encoding schemes. This tool can accept single user input, multiple inputs from a file, input from argument, **multi-encoded bases**, **bases in image EXIF data**, **bases on images with OCR** and decode them incredibly fast.
 
-Decode Base16, Base32, Base36, Base58, Base62, Base64, Base64Url, Base85, Ascii85, Base91, Base92 and more with the best base encoding scheme decoding tool in town. It's useful for **CTFs**, **Bug Bounty Hunting**, and **Cryptography**.
+Decode Base16, Base32, Base36, Base58, Base62, Base64, Base64Url, Base85, Ascii85, Base91, Base92 and more with the best base encoding scheme decoding tool in town. It's useful for **CTFs**, **Bug Bounty Hunting**, and **Cryptography** (**NOTE:** Base Encoding is not an "Encryption" hence it doesn't fall under the Cryptography category, it's useful as base scheme encoding are often used in cryptography tools/projects/challenges).
 
 <details>
   <summary>Fun Fact!</summary>
