@@ -10,7 +10,7 @@ import os, re, sys, time, platform, json, argparse
 from colorama import init
 from termcolor import colored
 
-import base36, base58, base62, base64, base91
+import anybase32, base36, base58, base62, base64, base91
 sys.path.append(os.path.join(os.path.dirname(__file__), "lib"))
 import base92
 
@@ -81,13 +81,26 @@ class BaseCrack:
                     'Base16'
                 )
             except: pass
+
             # decoding as base32
             try:
                 process_decode(
                     base64.b32decode(encoded_base, casefold=False, map01=None).decode('utf-8', 'replace'),
                     'Base32'
                 )
-            except: pass
+            except:
+                """
+                Base32 charset can differ based on their spec, this requires stripping
+                the padding or changing charsets to get the correct results.
+                By default this `anybase32` implementation follows the RFC 3548 spec.
+                """
+                temp_clean_base = str.encode(encoded_base.replace('=', ''))
+                process_decode(
+                    anybase32.decode(temp_clean_base).decode('utf-8', 'replace'),
+                    'Base32'
+                )
+            else: pass
+
             # decoding as base36
             try:
                 process_decode(
@@ -95,6 +108,7 @@ class BaseCrack:
                     'Base36'
                 )
             except: pass
+
             # decoding as base58
             try:
                 process_decode(
@@ -102,6 +116,7 @@ class BaseCrack:
                     'Base58'
                 )
             except: pass
+
             # decoding as base62
             try:
                 process_decode(
@@ -109,13 +124,15 @@ class BaseCrack:
                     'Base62'
                 )
             except: pass
+
             # decoding as base64
             try:
                 process_decode(
                     base64.b64decode(encoded_base).decode('utf-8', 'replace'),
                     'Base64'
                 )
-            except: pass            
+            except: pass      
+
             # decoding as base64url
             try:
                 process_decode(
@@ -123,6 +140,7 @@ class BaseCrack:
                     'Base64URL'
                 )
             except: pass
+
             # decoding as base85
             try:
                 process_decode(
@@ -130,6 +148,7 @@ class BaseCrack:
                     'Base85'
                 )
             except: pass
+
             # decoding as ascii85
             try:
                 process_decode(
@@ -137,6 +156,7 @@ class BaseCrack:
                     'Ascii85'
                 )
             except: pass
+
             # decoding as base91
             try:
                 process_decode(
@@ -144,6 +164,7 @@ class BaseCrack:
                     'Base91'
                 )
             except: pass
+
             # decoding as base92
             try:
                 process_decode(

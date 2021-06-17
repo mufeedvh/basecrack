@@ -1,6 +1,7 @@
 argparse
 colorama
 termcolor
+anybase32
 base36
 base58
 pybase62
