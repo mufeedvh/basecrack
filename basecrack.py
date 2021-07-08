@@ -88,7 +88,10 @@ class BaseCrack:
                     base64.b32decode(encoded_base, casefold=False, map01=None).decode('utf-8', 'replace'),
                     'Base32'
                 )
-            except:
+            except: pass
+
+            # decoding as base32 (RFC 3548)
+            try:
                 """
                 Base32 charset can differ based on their spec, this requires stripping
                 the padding or changing charsets to get the correct results.
@@ -99,7 +102,7 @@ class BaseCrack:
                     anybase32.decode(temp_clean_base).decode('utf-8', 'replace'),
                     'Base32'
                 )
-            else: pass
+            except: pass
 
             # decoding as base36
             try:
