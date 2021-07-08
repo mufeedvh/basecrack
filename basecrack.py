@@ -204,7 +204,8 @@ class BaseCrack:
             for line in input_file:
                 # checking if the line/base is not empty
                 if len(line) > 1:
-                    print(colored('\n[-] Encoded Base: ', 'yellow')+str(line.strip()))
+                    line = line.strip()
+                    print(colored('\n[-] Encoded Base: ', 'yellow')+str(line))
                     if self.magic_mode_call: self.magic_mode(line)
                     else: self.decode_base(line)
                     print(colored('\n{{<<', 'red')+colored('='*70, 'yellow')+colored('>>}}', 'red'))
