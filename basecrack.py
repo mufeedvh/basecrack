@@ -23,6 +23,7 @@ class BaseCrack:
         self.magic_mode_call = magic_mode_call
         self.image_mode_call = False
         self.quit_after_fail = quit_after_fail
+        self.b32_once = False
         self.b64_once = False
         self.b64_url = False
         self.current_iter_base = None
@@ -88,21 +89,23 @@ class BaseCrack:
                     base64.b32decode(encoded_base, casefold=False, map01=None).decode('utf-8', 'replace'),
                     'Base32'
                 )
+                self.b32_once = True
             except: pass
 
             # decoding as base32 (RFC 3548)
-            try:
-                """
-                Base32 charset can differ based on their spec, this requires stripping
-                the padding or changing charsets to get the correct results.
-                By default this `anybase32` implementation follows the RFC 3548 spec.
-                """
-                temp_clean_base = str.encode(encoded_base.replace('=', ''))
-                process_decode(
-                    anybase32.decode(temp_clean_base).decode('utf-8', 'replace'),
-                    'Base32'
-                )
-            except: pass
+            if not self.b32_once:
+                try:
+                    """
+                    Base32 charset can differ based on their spec, this requires stripping
+                    the padding or changing charsets to get the correct results.
+                    By default this `anybase32` implementation follows the RFC 3548 spec.
+                    """
+                    temp_clean_base = str.encode(encoded_base.replace('=', ''))
+                    process_decode(
+                        anybase32.decode(temp_clean_base).decode('utf-8', 'replace'),
+                        'Base32'
+                    )
+                except: pass                
 
             # decoding as base36
             try:
@@ -189,7 +192,7 @@ class BaseCrack:
                     if self.output != None:
                         open(self.output, 'a').write(results[x]+'\n')
                 else:
-                    return results[x], encoding_type[x]
+                    return results[x].strip(), encoding_type[x]
 
             if self.image_mode_call and results:
                 print(colored('\n{{<<', 'red')+colored('='*70, 'yellow')+colored('>>}}', 'red'))
