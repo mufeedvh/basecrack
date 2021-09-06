@@ -10,7 +10,7 @@
 <details>
 	<summary><strong>Fun Fact!</strong></summary>
   	<br>
-  	I initially made this after being fed up with lame CTF challenges with multi-encoded bases. Now some of them started doing that in Steganography challenges as well so I automated that too smh!
+  	I initially made this after being fed up with lame CTF challenges with multi-encoded bases. Now some of them started doing that in Steganography challenges so I automated that too smh!
 </details>
 
 ## Table of Contents
