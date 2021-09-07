@@ -7,6 +7,8 @@
 
 **BaseCrack** is a tool written in Python that can decode all alphanumeric base encoding schemes. This tool can accept single user input, multiple inputs from a file, input from argument, **multi-encoded bases**, **bases in image EXIF data**, **bases on images with OCR** and decode them incredibly fast.
 
+For a basic demo, try the [Web Interface](https://basecrack.herokuapp.com/) that uses BaseCrack's [API](#api).
+
 <details>
 	<summary><strong>Fun Fact!</strong></summary>
   	<br>
