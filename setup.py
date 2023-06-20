@@ -4,7 +4,7 @@ setup(
     name='basecrack',
     version=4.0 ,
     description='Decode All Bases - Base Scheme Decoder',
-    author='JakeWharton',
+    author='Mufeed VH',
     url='https://github.com/JamesConlan96/basecrack',
     license='MIT',
     packages=[
